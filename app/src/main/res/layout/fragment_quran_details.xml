@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.dedechandran.quranapps.ui.details.QuranDetailsViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvSurahMetaData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_green_gradient"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivArrowBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvSurahNameInArab"
+                        style="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.surahDetails.surahNameInArab}"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ivArrowBack"
+                        tools:text="الناس" />
+
+                    <TextView
+                        android:id="@+id/tvSurahTranslation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{viewModel.surahDetails.surahTranslation}"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toStartOf="@id/tvRevelation"
+                        app:layout_constraintStart_toStartOf="@+id/tvSurahNameInArab"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSurahNameInArab"
+                        tools:text="Pembukaan" />
+
+                    <TextView
+                        android:id="@+id/tvRevelation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@{viewModel.surahDetails.surahRevelation}"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/tvSurahTranslation"
+                        app:layout_constraintEnd_toStartOf="@id/tvVerseNumber"
+                        app:layout_constraintStart_toEndOf="@id/tvSurahTranslation"
+                        app:layout_constraintTop_toTopOf="@id/tvSurahTranslation"
+                        tools:text="Makkiyah" />
+
+                    <TextView
+                        android:id="@+id/tvVerseNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="@{viewModel.surahDetails.surahVerseNumber}"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/tvRevelation"
+                        app:layout_constraintEnd_toEndOf="@id/tvSurahNameInArab"
+                        app:layout_constraintStart_toEndOf="@id/tvRevelation"
+                        app:layout_constraintTop_toTopOf="@id/tvRevelation"
+                        tools:text="7 Verses" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBarCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCardErrorMessage"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Terjadi Kesalahan"
+                        android:textColor="@color/white"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.dedechandran.quranapps.component.verse.VerseListView
+                android:id="@+id/rvVerse"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvSurahMetaData" />
+
+            <ProgressBar
+                android:id="@+id/progressBarList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvVerse"
+                app:layout_constraintEnd_toEndOf="@+id/rvVerse"
+                app:layout_constraintStart_toStartOf="@+id/rvVerse"
+                app:layout_constraintTop_toTopOf="@+id/rvVerse" />
+
+            <include
+                android:id="@+id/errorStateContainer"
+                layout="@layout/layout_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvVerse"
+                app:layout_constraintEnd_toEndOf="@+id/rvVerse"
+                app:layout_constraintStart_toStartOf="@+id/rvVerse"
+                app:layout_constraintTop_toTopOf="@+id/rvVerse" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

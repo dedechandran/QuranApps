@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.dedechandran.quranapps.ui.home.QuranHomeViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                app:title="QuranApps" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvLastRead"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:visibility="gone"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_card_green_gradient"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvLastReadLabel"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Terakhir Baca :"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvLastReadSurahNameInArab"
+                        style="@style/TextAppearance.MaterialComponents.Headline3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="start"
+                        android:text="@{viewModel.lastRead.lastReadSurahNameInArab}"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvLastReadSurahName"
+                        app:layout_constraintTop_toBottomOf="@id/tvLastReadLabel"
+                        tools:text="الناس" />
+
+                    <TextView
+                        android:id="@+id/tvLastReadDate"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@{viewModel.lastReadDateDisplayedItem}"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/tvLastReadLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvLastReadLabel"
+                        app:layout_constraintTop_toTopOf="@id/tvLastReadLabel"
+                        tools:text="Rabu, 15 April 2022" />
+
+
+                    <TextView
+                        android:id="@+id/tvLastReadSurahName"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.lastRead.lastReadSurahName}"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/tvLastReadVerseNumber"
+                        app:layout_constraintStart_toStartOf="@id/tvLastReadLabel"
+                        app:layout_constraintTop_toTopOf="@+id/tvLastReadSurahNameInArab"
+                        tools:text="Al-Baqarah" />
+
+
+                    <TextView
+                        android:id="@+id/tvLastReadVerseNumber"
+                        style="@style/TextAppearance.MaterialComponents.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.lastReadVerseNumberDisplayedItem}"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvLastReadSurahNameInArab"
+                        app:layout_constraintEnd_toEndOf="@+id/tvLastReadSurahName"
+                        app:layout_constraintStart_toStartOf="@id/tvLastReadSurahName"
+                        app:layout_constraintTop_toBottomOf="@id/tvLastReadSurahName"
+                        tools:text="Ayat 250" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.dedechandran.quranapps.component.surah.SurahListView
+                android:id="@+id/rvSurah"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cvLastRead" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/rvSurah"
+                app:layout_constraintEnd_toEndOf="@+id/rvSurah"
+                app:layout_constraintStart_toStartOf="@+id/rvSurah"
+                app:layout_constraintTop_toTopOf="@+id/rvSurah" />
+
+            <include
+                android:id="@+id/errorStateContainer"
+                layout="@layout/layout_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/rvSurah"
+                app:layout_constraintEnd_toEndOf="@+id/rvSurah"
+                app:layout_constraintStart_toStartOf="@+id/rvSurah"
+                app:layout_constraintTop_toTopOf="@+id/rvSurah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
